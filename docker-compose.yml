@@ -1,0 +1,23 @@
+version: "2"
+services:
+  ui:
+    build: ./ui
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+  api:
+    build: ./api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+  mongo-seed:
+    build: ./db
+    depends_on:
+      - mongodb
